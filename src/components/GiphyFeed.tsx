@@ -5,7 +5,7 @@ export const GiphyFeed = ({ giphys }) => {
   return (
     <ul className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
       {giphys.length > 0 &&
-        giphys.map((item, index) => {
+        giphys.map((item, index: number) => {
           return (
             <li key="index" className="p-6">
               <h3>{item.title}</h3>
