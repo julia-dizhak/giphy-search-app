@@ -1,6 +1,9 @@
 import Head from "next/head";
+import { useRouter } from "next/navigation";
 
 const About = () => {
+  const router = useRouter();
+
   return (
     <div className="flex flex-col items-center justify-between p-24">
       <Head>
@@ -39,6 +42,14 @@ const About = () => {
         make them stronger than images and their shorter length make them more
         digestible than video. Thatis the short answer.
       </p>
+
+      <button
+        type="button"
+        className="bg-sky-500 hover:bg-sky-700"
+        onClick={() => router.push("/dashboard")}
+      >
+        Home page
+      </button>
     </div>
   );
 };
