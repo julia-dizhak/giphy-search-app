@@ -1,27 +1,44 @@
-"use client";
 
-import { SEARCH } from "@/src/components/config";
-import { useState } from "react";
+import { API_KEY, LIMIT } from "@/src/components/config";
 
-export const FormSearchGiphy = ({ giphys }) => {
-  const [searchTerm, setSearchTerm] = useState(SEARCH);
-  const [formInputs, setFormInputs] = useState({});
+export const FormSearchGiphy = ({
+  giphys,
+  searchTerm,
+  setSearchTerm,
+  formInputs,
+  setFormInputs,
+  setSearchResults,
+}) => {
+  const handleInputs = (event: { target: { name: string; value: string } }) => {
 
-  const handleInputs = (event) => {
     const { name, value } = event.target;
     setFormInputs({ ...formInputs, [name]: value });
   };
 
-  const handleSearch = (event) => {
+  const handleSearch = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    console.log(formInputs.searchTerm);
+    setSearchTerm(formInputs.searchTerm);
+
+    const giphys = await fetch(
+      `https://api.giphy.com/v1/gifs/search?q=${formInputs.searchTerm}&api_key=${API_KEY}&limit=${LIMIT}`
+    );
+    const giphysData = await giphys.json();
+    setSearchResults(giphysData.data);
   };
 
   return (
     <div className="mb-6 mt-12 pb-12">
       <form onSubmit={handleSearch} className="mb-6">
-        <input name="searchTerm" onChange={handleInputs} type="text" required />
-        <button className="bg-sky-500 hover:bg-sky-700 p-6" type="submit">
+        <input
+          className="m-2 p-2"
+          name="searchTerm"
+          onChange={handleInputs}
+          type="text"
+          required
+          value={formInputs.searchTerm}
+        
+        />
+        <button className="bg-sky-500 hover:bg-sky-700 p-6 m-2" type="submit">
           Search
         </button>
       </form>

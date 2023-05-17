@@ -7,6 +7,7 @@ import {
 } from "react";
 
 export const GiphyFeed = ({ giphys }) => {
+
   return (
     <div className="mb-24">
       {!giphys && <div>No giphys</div>}
@@ -27,11 +28,12 @@ export const GiphyFeed = ({ giphys }) => {
                   | null
                   | undefined;
                 images: { original: { url: string | undefined } };
+                id: string
               },
               index: number
             ) => {
               return (
-                <li key="index" className="p-6">
+                <li key={item.id} className="p-6">
                   <h3>{item.title}</h3>
                   <img src={item.images.original.url} alt={item.title} />
                   {/* <Image src={item.images.original.url} alt={item.title} priority /> */}
