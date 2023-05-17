@@ -1,41 +1,8 @@
 import Image from "next/image";
-import { API_KEY, LIMIT, SEARCH } from "./config";
 import Link from "next/link";
-import { Suspense } from "react";
-import { GiphyFeed } from "@/src/components/GiphyFeed";
-import { FormSearchGiphy } from "@/src/components/FormSearchGiphy";
-import { useState, useEffect } from "react";
+import { SearchGiphy } from "@/src/components/search/SearchGiphy";
 
-async function getData() {
-  const res = await fetch(
-    `https://api.giphy.com/v1/gifs/search?q=${SEARCH}&api_key=${API_KEY}&limit=${LIMIT}`
-  );
-
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  const catGiphys = await res.json();
-
-  return { catGiphys: catGiphys };
-}
-
-const Home = async () => {
-  const data = await getData();
-  const giphys = data.catGiphys;
-  const dataGiphys = giphys.data;
-
-  // const [searchGiphyResults, setSearchResults] = useState([]);
-
-  // useEffect(() => {
-  //   setSearchResults(dataGiphys);
-  // }, [dataGiphys]);
-
+const Home = () => {
   return (
     <>
       <main className="flex flex-col items-center justify-between p-24">
@@ -52,31 +19,9 @@ const Home = async () => {
           </h1>
         </div>
 
-        <FormSearchGiphy giphys={dataGiphys} />
-
-        <div className="mb-24">
-          <Suspense fallback={<p>Loading giphys ...</p>}>
-            <GiphyFeed giphys={dataGiphys} />
-          </Suspense>
-        </div>
+        <SearchGiphy />
 
         <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-          <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-            <Link
-              href="/about"
-              className="mb-3 text-2xl font-semibold text-sky-500 hover:text-sky-700"
-            >
-              About
-            </Link>
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              Find in-depth information about giphy
-            </p>
-          </div>
-
           <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
             <Link
               href="/about"
