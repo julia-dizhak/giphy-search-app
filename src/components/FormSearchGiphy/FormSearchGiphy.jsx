@@ -1,6 +1,4 @@
 
-import { API_KEY, LIMIT } from "@/src/components/config";
-
 export const FormSearchGiphy = ({
   giphys,
   searchTerm,
@@ -9,21 +7,22 @@ export const FormSearchGiphy = ({
   setFormInputs,
   setSearchResults,
 }) => {
-  const handleInputs = (event: { target: { name: string; value: string } }) => {
+  const handleInputs = (event) => {
 
     const { name, value } = event.target;
     setFormInputs({ ...formInputs, [name]: value });
   };
 
-  const handleSearch = async (event: { preventDefault: () => void }) => {
+  const handleSearch = async (event) => {
     event.preventDefault();
-    setSearchTerm(formInputs.searchTerm);
+
 
     const giphys = await fetch(
       `https://api.giphy.com/v1/gifs/search?q=${formInputs.searchTerm}&api_key=${API_KEY}&limit=${LIMIT}`
     );
     const giphysData = await giphys.json();
     setSearchResults(giphysData.data);
+    setSearchTerm(formInputs.searchTerm);
   };
 
   return (

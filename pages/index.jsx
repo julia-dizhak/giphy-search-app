@@ -1,8 +1,19 @@
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { SearchGiphy } from "@/src/components/search/SearchGiphy";
+import { FormSearchGiphy } from "../src/components/FormSearchGiphy/FormSearchGiphy";
+import { GiphyFeed } from "../src/components/GiphyFeed/GiphyFeed";
+import { SEARCH_DEFAULT, API_KEY, LIMIT } from "../src/api/config";
 
-const Home = () => {
+const SearchGiphyAppHome = (initialData) => {
+  const [searchGiphyResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(SEARCH_DEFAULT);
+  const [formInputs, setFormInputs] = useState({});
+
+  useEffect(() => {
+    setSearchResults(initialData?.catGiphys?.data);
+  }, [initialData]);
+
   return (
     <>
       <main className="flex flex-col items-center justify-between p-24">
@@ -19,25 +30,20 @@ const Home = () => {
           </h1>
         </div>
 
-        <SearchGiphy />
+        {searchGiphyResults && searchGiphyResults.data && (
+          <FormSearchGiphy
+            giphys={searchGiphyResults.data}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            formInputs={formInputs}
+            setFormInputs={setFormInputs}
+            setSearchResults={setSearchResults}
+          />
+        )}
+
+        {searchGiphyResults && <GiphyFeed giphys={searchGiphyResults} />}
 
         <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-          <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-            <Link
-              href="/about"
-              className="mb-3 text-2xl font-semibold text-sky-500 hover:text-sky-700"
-            >
-              About
-            </Link>
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              Find in-depth information about giphy
-            </p>
-          </div>
-
           <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
             <Link
               href="/about"
@@ -72,7 +78,7 @@ const Home = () => {
         </div>
       </main>
 
-      <footer className="fixed bottom-0 left-0 pl-24 pr-24 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
+      <footer className="fixed text-color-white bottom-0 left-0 pl-24 pr-24 flex h-48 w-full items-end justify-center bg-color-blue from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
         <a
           className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
           href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -111,4 +117,13 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default SearchGiphyAppHome;
+
+export async function getServerSideProps() {
+  const catGiphys = await fetch(
+    `https://api.giphy.com/v1/gifs/search?q=${SEARCH_DEFAULT}&api_key=${API_KEY}&limit=${LIMIT}`
+  );
+  console.log({ catGiphys });
+  const catGiphysData = await catGiphys.json();
+  return { props: { catGiphys: catGiphysData } };
+}

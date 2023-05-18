@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 const About = () => {
   const router = useRouter();
@@ -46,7 +46,7 @@ const About = () => {
       <button
         type="button"
         className="bg-sky-500 hover:bg-sky-700"
-        onClick={() => router.push("/dashboard")}
+        onClick={() => router.push("/")}
       >
         Home page
       </button>
