@@ -30,9 +30,8 @@ const SearchGiphyAppHome = (initialData) => {
           </h1>
         </div>
 
-        {searchGiphyResults && searchGiphyResults.data && (
+        {searchGiphyResults && (
           <FormSearchGiphy
-            giphys={searchGiphyResults.data}
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
             formInputs={formInputs}
