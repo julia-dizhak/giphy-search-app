@@ -8,7 +8,7 @@ const About = () => {
     <div className="flex flex-col items-center justify-between p-24">
       <Head>
         <title>About</title>
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="Why do people love giphys?"></meta>
       </Head>
 
       <h1 className="mb-3 text-4xl font-semibold pt-6 pb-6">About</h1>

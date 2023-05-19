@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FormSearchGiphy } from "../src/components/FormSearchGiphy/FormSearchGiphy";
 import { GiphyFeed } from "../src/components/GiphyFeed/GiphyFeed";
 import { SEARCH_DEFAULT, API_KEY, LIMIT } from "../src/api/config";
+import Head from "next/head";
 
 const SearchGiphyAppHome = (initialData) => {
   const [searchGiphyResults, setSearchResults] = useState([]);
@@ -16,28 +17,39 @@ const SearchGiphyAppHome = (initialData) => {
 
   return (
     <>
+      <Head>
+        <title>Giphy Search App</title>
+        <meta
+          name="description"
+          content="Love giphys? We do too. Use our advanced giphy search to find the perfect giphy for any occation"
+        ></meta>
+      </Head>
+
       <main className="flex flex-col items-center justify-between p-24">
         <nav className="fixed left-0 top-0 flex w-full border-b border-gray-400 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit">
           <p className="pl-24 pr-24">You can Search Giphy here</p>
-          <Link href="/about" className="text-sky-500 hover:text-sky-700">
-            About
+          <Link href="/about">
+            <span className="text-sky-500 hover:text-sky-800 underline">
+              About
+            </span>
           </Link>{" "}
-          &nbsp;
-          <Link href="/search" className="text-sky-500 hover:text-sky-700">
+          &nbsp; / &nbsp;
+          <Link
+            href="/search"
+            className="text-sky-500 hover:text-sky-800 underline"
+          >
             Search
           </Link>
-          &nbsp;
-          <Link href="/search/cats">
-            <a>View some cat giphys</a>
-          </Link>
-          &nbsp;
+          &nbsp; / &nbsp;
+          <Link href="/search/cats">View some cat giphys</Link>
+          &nbsp; / &nbsp;
           <Link
-            href="/search/[pid]"
-            as={`/search/${searchTerm}`}>
-              <a> 
-                {`http://localhost:3000/search/${searchTerm}`}
-              </a>
-      </Link>
+            href="/search/${searchTerm}"
+            as={`/search/${searchTerm}`}
+            className="text-sky-500 hover:text-sky-800 underline"
+          >
+            Search term
+          </Link>
         </nav>
 
         <div className="mb-6 z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">

@@ -2,22 +2,31 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { GiphyFeed } from "../../src/components/GiphyFeed/GiphyFeed";
 import Link from "next/link";
+import React, { useState, useEffect } from "react";
 
 export default function Search(initialData) {
   const router = useRouter();
-  console.log({ initialData });
+
+  const [searchGiphyResults, setSearchResults] = useState([]);
+  useEffect(() => {
+    setSearchResults(initialData?.giphys?.data);
+  }, [initialData]);
 
   return (
     <div className="flex flex-col items-center justify-between p-24">
       <Head>
-        <title>Search</title>
+        <title>Search results for: {router.query.searchTerm}</title>
+        <meta
+          name="description"
+          content={searchGiphyResults.map((item, index) => item.title + " ")}
+        ></meta>
       </Head>
       <h1>
         Search results for:<b>{router.query.searchTerm}</b>{" "}
       </h1>
 
       <div className="giphy-search-results-grid">
-        <GiphyFeed giphys={initialData.giphys.data} />
+        <GiphyFeed giphys={searchGiphyResults} />
       </div>
 
       <p>
