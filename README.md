@@ -7,22 +7,22 @@ Build a giphy search app using Next.js v12, React 18, Tailwind v3
 Deployed by Vercel.
 The project is available on link [Blog](https://giphy-search-app-bay.vercel.app/).
 
+### UI
 
-### Design
-Here is how the design look like for desktop and mobile
-![giphy-search-app](./docs/blog.png)
-
-
+Here is how the design look like
+![giphy-search-app](./public/ui.png)
 
 ## Plan for Giphy Search App
 
 Stage I
+
 - fetching data
 - Accessing the data
 - Showing the giphys to the user
 - Apply styling
 
 Stage II
+
 - add search form
 - Setting up the keyword search form
 - onChange event
@@ -33,7 +33,7 @@ Stage II
 - Call the new function from the onSubmit event
 - Styling the form
 
-Stage III: 
+Stage III:
 Replace the server-side rendered page with data you fetch from your client based on a search term our user will supply.
 
 - Storing pre-rendered data in state
@@ -45,26 +45,23 @@ Dynamic routes
 domain.com/search/cats
 domain.com/search/dogs
 
-
 ## How to run an app locally
 
 - clone the project
 - install dependencies
 - run a command `npm run dev`
 
-
 ## Requirements
 
 The app built using Next.js - The ultimate way to build React apps
 
-* Next.js v13
-* React 18
-* useSWR
-* Tailwind v3
-* used giphy api 
-
+- Next.js v13
+- React 18
+- useSWR
+- Tailwind v3
+- used giphy api
 
 ## Todo
-* add unit tests
-* keep data in local storage
 
+- add unit tests
+- keep data in local storage
