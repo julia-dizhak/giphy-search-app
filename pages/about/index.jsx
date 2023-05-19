@@ -45,7 +45,7 @@ const About = () => {
 
       <button
         type="button"
-        className="bg-sky-500 hover:bg-sky-700"
+        className="bg-sky-500 hover:bg-sky-700 rounded-sm"
         onClick={() => router.push("/")}
       >
         Home page

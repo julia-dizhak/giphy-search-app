@@ -28,6 +28,11 @@ Replace the server-side rendered page with data you fetch from your client based
 - Initialize searchResults state
 - Store initial dog giphy data in state
 
+Stage IV:
+Dynamic routes
+domain.com/search/cats
+domain.com/search/dogs
+
 
 ## How to run an app locally
 

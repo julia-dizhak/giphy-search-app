@@ -11,7 +11,7 @@ const SearchGiphyAppHome = (initialData) => {
   const [formInputs, setFormInputs] = useState({});
 
   useEffect(() => {
-    setSearchResults(initialData?.catGiphys?.data);
+    setSearchResults(initialData?.giphys?.data);
   }, [initialData]);
 
   return (
@@ -21,7 +21,23 @@ const SearchGiphyAppHome = (initialData) => {
           <p className="pl-24 pr-24">You can Search Giphy here</p>
           <Link href="/about" className="text-sky-500 hover:text-sky-700">
             About
+          </Link>{" "}
+          &nbsp;
+          <Link href="/search" className="text-sky-500 hover:text-sky-700">
+            Search
           </Link>
+          &nbsp;
+          <Link href="/search/cats">
+            <a>View some cat giphys</a>
+          </Link>
+          &nbsp;
+          <Link
+            href="/search/[pid]"
+            as={`/search/${searchTerm}`}>
+              <a> 
+                {`http://localhost:3000/search/${searchTerm}`}
+              </a>
+      </Link>
         </nav>
 
         <div className="mb-6 z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -43,22 +59,6 @@ const SearchGiphyAppHome = (initialData) => {
         {searchGiphyResults && <GiphyFeed giphys={searchGiphyResults} />}
 
         <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-          <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-            <Link
-              href="/about"
-              className="mb-3 text-2xl font-semibold text-sky-500 hover:text-sky-700"
-            >
-              About
-            </Link>
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              Find in-depth information about giphy
-            </p>
-          </div>
-
           <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
             <Link
               href="/about"
@@ -119,10 +119,10 @@ const SearchGiphyAppHome = (initialData) => {
 export default SearchGiphyAppHome;
 
 export async function getServerSideProps() {
-  const catGiphys = await fetch(
+  const giphys = await fetch(
     `https://api.giphy.com/v1/gifs/search?q=${SEARCH_DEFAULT}&api_key=${API_KEY}&limit=${LIMIT}`
   );
-  console.log({ catGiphys });
-  const catGiphysData = await catGiphys.json();
-  return { props: { catGiphys: catGiphysData } };
+
+  const giphysData = await giphys.json();
+  return { props: { giphys: giphysData } };
 }
