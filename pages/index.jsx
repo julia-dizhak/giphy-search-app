@@ -27,6 +27,9 @@ const SearchGiphyAppHome = (initialData) => {
 
       <main className="flex flex-col items-center justify-between p-24">
         <nav className="fixed left-0 top-0 flex w-full border-b border-gray-400 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit">
+          <div className="">
+            <Image src="/download.png" alt="logo" width={48} height={20} />
+          </div>
           <p className="pl-24 pr-24">You can Search Giphy here</p>
           <Link href="/about">
             <span className="text-sky-500 hover:text-sky-800 underline">
@@ -34,21 +37,23 @@ const SearchGiphyAppHome = (initialData) => {
             </span>
           </Link>{" "}
           &nbsp; / &nbsp;
-          <Link
-            href="/search"
-            className="text-sky-500 hover:text-sky-800 underline"
-          >
-            Search
+          <Link href="/search/cats">
+            <span className="text-sky-500 hover:text-sky-800 underline">
+              View some cats giphy
+            </span>
           </Link>
           &nbsp; / &nbsp;
-          <Link href="/search/cats">View some cat giphys</Link>
+          <Link href="/search/cats">
+            <span className="text-sky-500 hover:text-sky-800 underline">
+              View some dogs giphy
+            </span>
+          </Link>
           &nbsp; / &nbsp;
-          <Link
-            href="/search/${searchTerm}"
-            as={`/search/${searchTerm}`}
-            className="text-sky-500 hover:text-sky-800 underline"
-          >
-            Search term
+          <Link href="/search/${searchTerm}" as={`/search/${searchTerm}`}>
+            <span className="text-sky-500 hover:text-sky-800 underline">
+              {" "}
+              Search term
+            </span>
           </Link>
         </nav>
 
@@ -56,7 +61,7 @@ const SearchGiphyAppHome = (initialData) => {
           <h1 className="mb-1 text-4xl font-semibold pt-6 pb-6">
             Giphy Search App
           </h1>
-          <div className="">
+          <div className="text-center">
             <Image src="/download.png" alt="logo" width={48} height={20} />
           </div>
         </div>

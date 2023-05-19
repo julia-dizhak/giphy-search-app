@@ -21,6 +21,15 @@ export default function Search(initialData) {
           content={searchGiphyResults.map((item, index) => item.title + " ")}
         ></meta>
       </Head>
+      <div className="text-center">
+        Go {" "}
+        <Link href="/" className="bg-sky-500 hover:bg-sky-700 rounded-sm p-2">
+          <span className="text-sky-500 hover:text-sky-800 underline">
+            home
+          </span>
+        </Link>
+      </div>
+
       <h1>
         Search results for:<b>{router.query.searchTerm}</b>{" "}
       </h1>
@@ -28,13 +37,6 @@ export default function Search(initialData) {
       <div className="giphy-search-results-grid">
         <GiphyFeed giphys={searchGiphyResults} />
       </div>
-
-      <p>
-        Go{" "}
-        <Link href="/" className="bg-sky-500 hover:bg-sky-700 rounded-sm p-2">
-          <a>home</a>
-        </Link>
-      </p>
     </div>
   );
 }
