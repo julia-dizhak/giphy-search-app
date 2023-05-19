@@ -56,6 +56,9 @@ const SearchGiphyAppHome = (initialData) => {
           <h1 className="mb-1 text-4xl font-semibold pt-6 pb-6">
             Giphy Search App
           </h1>
+          <div className="">
+            <Image src="/download.png" alt="logo" width={48} height={20} />
+          </div>
         </div>
 
         {searchGiphyResults && (

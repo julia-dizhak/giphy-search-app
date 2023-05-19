@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const GiphyFeed = ({ giphys }) => {
   return (
     <div className="mb-24">
@@ -11,7 +13,7 @@ export const GiphyFeed = ({ giphys }) => {
               <li key={item.id} className="p-6">
                 <h3>{item.title}</h3>
                 <img src={item.images.original.url} alt={item.title} />
-                {/* <Image src={item.images.original.url} alt={item.title} priority /> */}
+                {/* <Image src={item.images.original.url} alt={item.title} fill /> */}
               </li>
             );
           })}
